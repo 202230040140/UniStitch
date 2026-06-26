@@ -205,7 +205,7 @@ def process_opencv_to_lmdb(base_path, lmdb_path, algorithm='SIFT',
            
            batch_num = batch_start // batch_size + 1
            total_batches = (len(name_list) + batch_size - 1) // batch_size
-#            print(f'\nProcessing batch {batch_num}/{total_batches}')
+           print(f'\nProcessing batch {batch_num}/{total_batches}')
            
            for idx, name in enumerate(batch_names):
                global_idx = batch_start + idx
@@ -288,7 +288,8 @@ def process_opencv_to_lmdb(base_path, lmdb_path, algorithm='SIFT',
 
 if __name__ == "__main__":
    # Process all algorithms
-   algorithms = ['SIFT', 'ORB', 'SURF', 'FAST']
+#    algorithms = ['SIFT', 'ORB', 'SURF', 'FAST']
+   algorithms = ['SIFT']
    
    for algo in algorithms:
        try:
@@ -296,10 +297,10 @@ if __name__ == "__main__":
            print(f"Starting {algo} algorithm processing")
            print(f"{'#'*60}")
            
-           lmdb_path = f'/data/my_files/Datasets/UDIS/training/opencv_{algo.lower()}_lmdb'
+           lmdb_path = f'/media/my123/0d52819b-6878-4445-b5be-37548de0a05d/datasets/ClassicalDataset/stitch_real/opencv_{algo.lower()}_lmdb'
            
            stats = process_opencv_to_lmdb(
-               base_path='/data/my_files/Datasets/UDIS/training/',
+               base_path='/media/my123/0d52819b-6878-4445-b5be-37548de0a05d/datasets/ClassicalDataset/stitch_real/',
                lmdb_path=lmdb_path,
                algorithm=algo,
                batch_size=10,

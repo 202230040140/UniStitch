@@ -1,0 +1,20 @@
+__pycache__/
+*.py[cod]
+*.pyo
+
+.venv/
+env/
+venv/
+
+model/
+*.pth
+*.pt
+*.ckpt
+UniStitch_Unifying Semantic and Geometric(2026 UniStitch).pdf
+
+outputs/
+reproduce/_work/
+*.log
+
+.idea/
+.vscode/

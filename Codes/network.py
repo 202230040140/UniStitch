@@ -333,7 +333,7 @@ def get_res18_FeatureMap(resnet18_model):
 # define and forward
 class Network(nn.Module):
 
-    def __init__(self, descriptor_dim=256):
+    def __init__(self, descriptor_dim=256, backbone_weights="DEFAULT"):
         super(Network, self).__init__()
 
         self.regressNet1 = nn.Sequential(
@@ -455,7 +455,12 @@ class Network(nn.Module):
                 m.weight.data.fill_(1)
                 m.bias.data.zero_()
 
-        resnet18_model = models.resnet.resnet18(weights="DEFAULT")
+        try:
+            if backbone_weights == "DEFAULT" and hasattr(models, "ResNet18_Weights"):
+                backbone_weights = models.ResNet18_Weights.DEFAULT
+            resnet18_model = models.resnet18(weights=backbone_weights)
+        except TypeError:
+            resnet18_model = models.resnet18(pretrained=backbone_weights is not None)
         if torch.cuda.is_available():
             resnet18_model = resnet18_model.cuda()
         self.feature_extractor_stage1, self.feature_extractor_stage2 = get_res18_FeatureMap(resnet18_model)
